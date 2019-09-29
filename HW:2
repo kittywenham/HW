@@ -1,0 +1,51 @@
+class Exam():
+    def __init__(self,doğru_sayısı,yanlış_sayısı):
+        self.doğru_sayısı = doğru_sayısı
+        self.yanlış_sayısı = yanlış_sayısı
+    def not_hesapla(self):
+        soru_sayısı = self.doğru_sayısı + self.yanlış_sayısı
+        self.toplam_not = 100/soru_sayısı
+        self.toplam_not *= self.doğru_sayısı
+        return self.toplam_not
+
+class Student():
+    def __init__(self,öğrenci_adı):
+        self.öğrenci_adı = öğrenci_adı
+        self.liste = []
+    def add_exam(self,sınav):
+        self.liste.append(sınav.not_hesapla())
+    def avg_score(self):
+        ortalama = 0
+        for i in self.liste:
+            ortalama += i
+        ortalama = ortalama / len(self.liste)
+        return ortalama
+
+class Class():
+    def __init__(self):
+        self.öğrenciler = []
+    def add_student(self,öğrenci):
+        self.öğrenciler.append(öğrenci.avg_score())
+    def class_avg(self):
+        ortalama = 0
+        for i in self.öğrenciler:
+            ortalama += i
+        ortalama = ortalama / len(self.öğrenciler)
+        return ortalama
+
+sınav = Exam(15,5)
+sınav2 = Exam(20,0)
+öğrenci = Student("Kitty")
+öğrenci.add_exam(sınav)
+print(öğrenci.öğrenci_adı, " not ortalaması: ", öğrenci.avg_score())
+öğrenci2 = Student("Grinch")
+sınav3 = Exam(17,4)
+sınav4 = Exam(19,1)
+öğrenci2.add_exam(sınav3)
+öğrenci2.add_exam(sınav4)
+print(öğrenci2.öğrenci_adı, " not ortalaması: ", öğrenci2.avg_score())
+
+sınıf = Class()
+sınıf.add_student(öğrenci)
+sınıf.add_student(öğrenci2)
+print("Sınıfın not ortalaması:", sınıf.class_avg())
