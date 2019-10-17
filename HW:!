@@ -1,0 +1,76 @@
+name = input("Type your name:")
+unit_price = int(input("Type the unit price of product you purchased:"))
+number = int(input("Type the number of product you purchased:"))
+price_paid = int(input("Type the price you paid:"))
+
+with open("store.txt","w") as folder:
+    data = name + ":" + str(unit_price) + ":" + str(number) + ":" + str(price_paid)
+    folder.write(data)
+    
+process = input("Would you like to perform another process? Y/N:")
+if process == "Y" :
+    process2 = input("1.Search\n2.Delete\n3.Add\n4.Edit\nChoose one and type the number of option:")
+
+    if process2 == "1." or process2 == "1":
+        with open("store.txt","r") as folder:
+            data = folder.read()
+            data = data.split(":")
+        searchfor = input("1.Name\n2.Unit Price\n3.Number\n4.Price Paid\nType the number of input you wanna search for:")
+        if searchfor == "1" or searchfor == "1.":
+            print(data[0])
+        elif searchfor == "2" or searchfor == "2.":
+            print(data[1])
+        elif searchfor == "3" or searchfor == "3.":
+            print(data[2])
+        elif searchfor == "4" or searchfor == "4.":
+            print(data[3])
+
+    if process2 == "2" or process2 == "2.":
+        with open("store.txt","r+") as folder:
+            data = folder.read()
+            data = data.split(":")
+        itemtodelete = input("1.Name\n2.Unit Price\n3.Number\n4.Price Paid\nType the number of input you wanna delete:")
+        newdata = ""
+        if itemtodelete == "1" or itemtodelete ==  "1.":
+            data.pop(0)
+        elif itemtodelete == "2" or itemtodelete == "2.":
+            data.pop(1)
+        elif itemtodelete == "3" or itemtodelete == "3.":
+            data.pop(2)
+        elif itemtodelete == "4" or itemtodelete == "4.":
+            data.pop(3)
+        for i in data:
+            newdata += i + ":"
+         with open("store.txt","w") as folder:
+            folder.write(newdata)
+
+   elif process2 == "3" or process2 == "3.":
+        with open("store.txt","r") as folder:
+            data = folder.read()
+            data = data.split(":")
+        newdata = ""
+        itemtoedit = input("1.Name\n2.Unit Price\n3.Number\n4.Price Paid\nType the number of input you wanna edit:")
+        if itemtoedit == "1" or itemtoedit == "1.":
+            name = input("Type your name:")
+            newdata = name + ":" + str(unit_price) + ":" + str(number) + ":" + str(price_paid)
+        elif itemtoedit == "2" or itemtoedit == "2.":
+            unit_price = int(input("Type the unit price of product you purchased:"))
+            newdata = name + ":" + str(unit_price) + ":" + str(number) + ":" + str(price_paid)
+        elif itemtoedit == "3" or itemtoedit == "3.":
+            number = int(input("Type the number of product you purchased:"))
+            newdata = name + ":" + str(unit_price) + ":" + str(number) + ":" + str(price_paid)
+        elif itemtoedit == "4" or itemtoedit == "4.":
+            price_paid = int(input("Type the price you paid:"))
+            newdata = name + ":" + str(unit_price) + ":" + str(number) + ":" + str(price_paid)
+        with open("store.txt","w") as folder:
+            folder.write(newdata)
+    
+    elif process2 == "4" or process2 == "4.":
+         name = input("Type your name:")
+        unit_price = int(input("Type the unit price of product you purchased:"))
+        number = int(input("Type the number of product you purchased:"))
+        price_paid = int(input("Type the price you paid:"))
+        data = name + ":" + str(unit_price) + ":" + str(number) + ":" + str(price_paid)
+        
+        with open("store.txt","a") as folder:
+            folder.write(data + "\n")
